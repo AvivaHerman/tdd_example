@@ -10,18 +10,18 @@ class MyStackTest extends SpecificationWithJUnit {
   "MyStack" should {
 
     "have size 0 in the beginning" in new Context {
-      stack.size must_== 0
+      stack.size.get must_== 0
     }
 
     "increase size after pushing" in new Context {
       stack.push(1)
-      stack.size must_== 1
+      stack.size.get must_== 1
     }
 
     "decrease size after popping" in new Context {
       stack.push(1)
       stack.pop()
-      stack.size must_== 0
+      stack.size.get must_== 0
     }
 
     "throw exception when popping from empty stack" in new Context {

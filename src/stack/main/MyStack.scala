@@ -1,22 +1,21 @@
-class MyStack(capacity: Int) {
+import java.util.concurrent.atomic.AtomicInteger
 
-  var size = 0
+class MyStack(capacity: Int) {
+  val size = new AtomicInteger(0)
   val values = new Array[Int](capacity)
 
   def push(i: Int): Unit = {
     if (stackIsFull) throw new OverflowException()
-    values.update(size, i)
-    size = size + 1
+    values.update(size.getAndIncrement, i)
   }
 
   def pop(): Int = {
     if (stackIsEmpty) throw new UnderflowException()
-    size = size - 1
-    values.apply(size)
+    values.apply(size.decrementAndGet)
   }
 
-  private def stackIsEmpty: Boolean = size == 0
+  private def stackIsEmpty: Boolean = size.get == 0
 
-  private def stackIsFull: Boolean = size == capacity
+  private def stackIsFull: Boolean = size.get == capacity
 
 }
