@@ -1,0 +1,3 @@
+class OverflowException extends Exception {
+
+}
